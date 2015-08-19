@@ -9,9 +9,9 @@ namespace API_V3_SDK.DataObject.Actions
 
     using Newtonsoft.Json;
 
-    public class ListDirectExpressServiceResponse : API_V3_Response
+    class SystemGetTrackingResponse : API_V3_Response
     {
         [JsonProperty(PropertyName = "body")]
-        public new List<DirectExpressService> body { get; set; }
+        public new SystemTrackingInfo body { get; set; }
     }
 }

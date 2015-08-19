@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using API_V3_SDK.Express;
 
 namespace API_V3_SDK.Test
 {

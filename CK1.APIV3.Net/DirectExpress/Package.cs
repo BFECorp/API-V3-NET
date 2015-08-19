@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-
-namespace API_V3_SDK.Express
+﻿namespace API_V3_SDK.DirectExpress
 {
+    using System;
+    using System.Collections.Generic;
+
     using API_V3_SDK.DataObject.Actions;
+
+    using Newtonsoft.Json;
 
     class Package : Chukou1V3Service
     {
@@ -24,8 +23,8 @@ namespace API_V3_SDK.Express
 
         public DirectExpressPricingResponse GetPackagePricing(Dictionary<String, String> parameters)
         {
-            Dispatcher["action"] = "pricing";
-            var requestUrl = this.CreateRequestUrl(Dispatcher);
+            this.Dispatcher["action"] = "pricing";
+            var requestUrl = this.CreateRequestUrl(this.Dispatcher);
 
             var json = HttpHelper.HttpGet(requestUrl, parameters);
 

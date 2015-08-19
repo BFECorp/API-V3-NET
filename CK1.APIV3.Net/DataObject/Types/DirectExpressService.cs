@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace API_V3_SDK.DirectExpress.DataObject
+﻿namespace API_V3_SDK.DataObject.Types
 {
     using Newtonsoft.Json;
 
