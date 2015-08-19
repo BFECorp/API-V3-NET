@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3D522B7C-8222-4AD6-8179-32764C129A01}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>API_V3_SDK</RootNamespace>
     <AssemblyName>API_V3_SDK</AssemblyName>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -54,13 +57,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CK1API_SDK.cs" />
+    <Compile Include="Chukou1V3Service.cs" />
+    <Compile Include="DataObject\Actions\DirectExpressPricingResponse.cs" />
+    <Compile Include="DataObject\Actions\ListDirectExpressServiceResponse.cs" />
+    <Compile Include="DataObject\Types\DirectExpressPricingInfo.cs" />
+    <Compile Include="DataObject\Types\DirectExpressService.cs" />
+    <Compile Include="DirectExpress\Misc.cs" />
     <Compile Include="EncodingHelper.cs" />
-    <Compile Include="Express\Package.cs" />
+    <Compile Include="DirectExpress\Package.cs" />
     <Compile Include="HttpHelper.cs" />
-    <Compile Include="M2C\Stock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\SDK_Test.cs" />
+    <Compile Include="Test\ApiConfig.cs" />
+    <Compile Include="Test\DirectExpressTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

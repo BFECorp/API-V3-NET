@@ -7,29 +7,19 @@ using Newtonsoft.Json;
 
 namespace API_V3_SDK
 {
-    public class CK1API_SDK_Base
+    public class Chukou1V3Service
     {
-        private static string API_BASE_URL
+        public string BaseUrl { get; private set; }
+
+        public Dictionary<string, string> AuthParams { get; private set; }
+
+        public Chukou1V3Service(string baseUrl, Dictionary<string, string> authParams)
         {
-            get
-            {
-                var url = ConfigurationManager.AppSettings["ck1:apiv3:url"];
-                if (string.IsNullOrEmpty(url))
-                {
-                    url = "http://demo.chukou1.cn/v3/";
-                }
-                return url;
-            }
+            this.BaseUrl = baseUrl;
+            this.AuthParams = authParams;
         }
 
-        protected static Dictionary<string, string> AuthParams =
-            new Dictionary<string, string>
-                {
-                    {"token", "887E99B5F89BB18BEA12B204B620D236"},
-                    {"user_key", "wr5qjqh4gj"},
-                };
-
-        public static string CreateRequestUrl(Dictionary<string, string> dispatcher)
+        public string CreateRequestUrl(Dictionary<string, string> dispatcher)
         {
             var paramStr = new StringBuilder();
 
@@ -38,12 +28,8 @@ namespace API_V3_SDK
                 paramStr.AppendFormat("{0}={1}&", EncodingHelper.UrlEncodeU8(pair.Key.Trim()), EncodingHelper.UrlEncodeU8(pair.Value.Trim()));
             }
 
-            return string.Format("{0}{1}?{2}", API_BASE_URL, 
+            return string.Format("{0}{1}?{2}", BaseUrl, 
                                     string.Join("/", dispatcher.Values.ToArray()), paramStr);
-        }
-
-        static void Main(string[] args)
-        {
         }
     }
 
