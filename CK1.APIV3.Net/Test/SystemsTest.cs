@@ -37,8 +37,6 @@ namespace API_V3_SDK.Test
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
 
-
-
         [Fact]
         public void TestGetPackages()
         {

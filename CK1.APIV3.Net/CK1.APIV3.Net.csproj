@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chukou1V3Service.cs" />
+    <Compile Include="DataObject\Actions\DirectExpressPrintLabelResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetPackagesResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetTrackingResponse.cs" />
     <Compile Include="DataObject\Actions\DirectExpressPricingResponse.cs" />
     <Compile Include="DataObject\Actions\ListDirectExpressServiceResponse.cs" />
     <Compile Include="DataObject\Types\DirectExpressPricingInfo.cs" />
+    <Compile Include="DataObject\Types\DirectExpressPrintLabelInfo.cs" />
     <Compile Include="DataObject\Types\DirectExpressService.cs" />
     <Compile Include="DataObject\Types\SystemGetPackageInfo.cs" />
     <Compile Include="DataObject\Types\SystemTrackingInfo.cs" />

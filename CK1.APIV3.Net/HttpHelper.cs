@@ -82,6 +82,93 @@ namespace API_V3_SDK
                     stream.Close();
                 }
             }
-        } 
+        }
+
+        public static MemoryStream HttpPostStream(string url, Dictionary<String, String> paramters, string postData = null, Encoding encoding = null, int timeoutSeconds = 0)
+        {
+            MemoryStream result = null;
+            Stream responseStream;
+
+            if (encoding == null)
+                encoding = Encoding.UTF8;
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            var paramStr = new StringBuilder("");
+
+            if (paramters != null)
+            {
+                foreach (KeyValuePair<String, String> pair in paramters)
+                {
+                    if (pair.Value != null)
+                    {
+                        paramStr.AppendFormat(
+                            "{0}={1}&",
+                            EncodingHelper.UrlEncodeU8(pair.Key.Trim()),
+                            EncodingHelper.UrlEncodeU8(pair.Value.Trim()));
+                    }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(postData))
+            {
+                paramStr.Append(postData);
+            }
+
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+            httpWebRequest.Method = "POST";
+
+            byte[] bytes = Encoding.ASCII.GetBytes(paramStr.ToString().TrimEnd('&'));
+            Stream os = null;
+            try
+            {
+                httpWebRequest.ContentLength = bytes.Length;
+                if (timeoutSeconds > 0)
+                {
+                    httpWebRequest.Timeout = timeoutSeconds * 1000;
+                }
+                os = httpWebRequest.GetRequestStream();
+                os.Write(bytes, 0, bytes.Length);         //Send it
+            }
+            catch (WebException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (os != null)
+                {
+                    os.Close();
+                }
+            }
+
+            #region 获取服务器的返回信息
+            try
+            {
+                var httpWebRespones = (HttpWebResponse)httpWebRequest.GetResponse();
+                responseStream = httpWebRespones.GetResponseStream();
+            }
+            //处理异常
+            catch (Exception ex)
+            {
+                throw new OperationCanceledException(ex.Message);
+            }
+            #endregion
+
+            const int bufferLength = 1024 * 10;
+
+            var data = new byte[bufferLength];
+
+            result = new MemoryStream();
+            var bytesRead = responseStream.Read(data, 0, bufferLength);
+
+            while (bytesRead > 0)
+            {
+                result.Write(data, 0, bytesRead);
+                bytesRead = responseStream.Read(data, 0, bufferLength);
+            }
+            responseStream.Close();
+
+            return result;
+        }
     }
 }
