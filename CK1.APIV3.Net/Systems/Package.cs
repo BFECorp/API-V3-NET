@@ -28,7 +28,7 @@ namespace API_V3_SDK.Systems
             Dispatcher["action"] = "get-packages";
             var requestUrl = this.CreateRequestUrl(Dispatcher);
 
-            var json = HttpHelper.HttpGet(requestUrl, parameters);
+            var json = HttpHelper.HttpPost(requestUrl, parameters);
 
             return JsonConvert.DeserializeObject<SystemGetPackagesResponse>(json);
         }
