@@ -51,6 +51,33 @@ namespace API_V3_SDK.Test
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
 
+
+        #region 取得某个直发包裹信息的可用服务列表及所需运费
+
+        [Fact]
+        public void TestGetCompareCharge()
+        {
+            var parameters = new Dictionary<string, string>
+                                 {
+                                     { "Packing", "10*10*10" },
+                                     { "weight_in_gram", "100" },
+                                     { "Country", "United States" },
+                                     { "province", "CA" },
+                                     { "arrive", "GZ" },
+                                     { "postcode", "12345" },
+                                     { "tracking", "false" }
+                                 };
+
+            var response = this.packageService.GetPackageCompareCharge(parameters);
+
+            Console.WriteLine(this.packageService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(parameters));
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+        }
+        #endregion
+
+        
+
         [Fact]
         public void TestPrintLabelOk()
         {
@@ -129,5 +156,6 @@ namespace API_V3_SDK.Test
                 Console.WriteLine(JsonConvert.SerializeObject(response));
             }
         }
+
     }
 }

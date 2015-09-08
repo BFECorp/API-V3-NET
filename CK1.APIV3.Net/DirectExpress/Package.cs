@@ -35,6 +35,16 @@
             return JsonConvert.DeserializeObject<DirectExpressPricingResponse>(json);
         }
 
+        public DirectExpressCompareChargeResponse GetPackageCompareCharge(Dictionary<String, String> parameters)
+        {
+            this.Dispatcher["action"] = "compare-charge";
+            var requestUrl = this.CreateRequestUrl(this.Dispatcher);
+
+            var json = HttpHelper.HttpGet(requestUrl, parameters);
+
+            return JsonConvert.DeserializeObject<DirectExpressCompareChargeResponse>(json);
+        }
+
         public DirectExpressPrintLabelResponse PrintLabel(LabelPrintFormat format, LabelContentType content, params string[] processNos)
         {
             this.Dispatcher["action"] = "print-label";

@@ -58,24 +58,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chukou1V3Service.cs" />
+    <Compile Include="DataObject\Actions\DirectExpressCompareChargeResponse.cs" />
     <Compile Include="DataObject\Actions\DirectExpressPrintLabelResponse.cs" />
+    <Compile Include="DataObject\Actions\OutboundPricingAllResponse.cs" />
+    <Compile Include="DataObject\Actions\OutboundPricingResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetPackagesResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetTrackingResponse.cs" />
     <Compile Include="DataObject\Actions\DirectExpressPricingResponse.cs" />
     <Compile Include="DataObject\Actions\ListDirectExpressServiceResponse.cs" />
+    <Compile Include="DataObject\Types\DirectExpressCompareChargeInfo.cs" />
     <Compile Include="DataObject\Types\DirectExpressPricingInfo.cs" />
     <Compile Include="DataObject\Types\DirectExpressPrintLabelInfo.cs" />
     <Compile Include="DataObject\Types\DirectExpressService.cs" />
+    <Compile Include="DataObject\Types\OutboundPricingAllInfo.cs" />
+    <Compile Include="DataObject\Types\OutboundPricingInfo.cs" />
     <Compile Include="DataObject\Types\SystemGetPackageInfo.cs" />
     <Compile Include="DataObject\Types\SystemTrackingInfo.cs" />
     <Compile Include="DirectExpress\Misc.cs" />
     <Compile Include="EncodingHelper.cs" />
     <Compile Include="DirectExpress\Package.cs" />
     <Compile Include="HttpHelper.cs" />
+    <Compile Include="Outbound\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\Package.cs" />
     <Compile Include="Systems\Tracking.cs" />
     <Compile Include="Test\ApiConfig.cs" />
+    <Compile Include="Test\OutboundTest.cs" />
     <Compile Include="Test\SystemsTest.cs" />
     <Compile Include="Test\DirectExpressTest.cs" />
   </ItemGroup>
