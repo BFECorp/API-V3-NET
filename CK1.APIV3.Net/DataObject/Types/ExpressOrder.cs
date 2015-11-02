@@ -11,12 +11,7 @@ namespace API_V3_SDK.DataObject.Types
         /// 揽收方式: 0:上门揽收; 1:卖家自送
         /// </summary>
         public int PickupType { get; set; }
-
-        /// <summary>
-        /// 业务类型
-        /// </summary>
-        public int ExpressType { get; set; }
-
+         
         /// <summary>
         /// 处理点(可用值: 广州; 深圳; 上海)
         /// </summary>
