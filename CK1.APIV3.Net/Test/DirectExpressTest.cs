@@ -187,7 +187,6 @@ namespace API_V3_SDK.Test
                 PickupType=0,
                 Location = "GZ",
                 IsTracking = true,
-                ExpressType = 0,
                 PackageList =
                     new List<ExpressPackage>()
                     {

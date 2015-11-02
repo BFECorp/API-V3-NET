@@ -20,7 +20,6 @@ namespace API_V3_SDK.DataObject.Types
             this.State = "Initial";
             this.Custom = string.Empty;
             this.TrackingNumber = string.Empty;
-            this.Services = string.Empty;
             this.ProductList = new List<OutStoreProduct>();
             this.Remark = string.Empty;
             this.BuyerEmail = string.Empty;
@@ -64,12 +63,6 @@ namespace API_V3_SDK.DataObject.Types
         [JsonProperty(PropertyName = "service_code")]
         public string Shipping { get; set; }
         
-        /// <summary>
-        /// 物流服务(多种服务用逗号隔开)
-        /// </summary>
-        [JsonProperty(PropertyName = "Services")]
-        public string Services { get; set; }
-
         /// <summary>
         /// 投递信息
         /// </summary>
