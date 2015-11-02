@@ -17,12 +17,14 @@ namespace API_V3_SDK.Test
     {
         #region ///属性
         private readonly Package packageService;
+        private readonly Order orderService;
         #endregion
 
         #region ///构造函数
         public OutboundTest()
         {
             packageService = new Package(ApiConfig.API_BASE_URL, ApiConfig.AuthParams);
+            orderService = new Order(ApiConfig.API_BASE_URL, ApiConfig.AuthParams);
         }
         #endregion
         
@@ -76,6 +78,56 @@ namespace API_V3_SDK.Test
         }
         #endregion
 
+
+        #region ///二程出库
+
+        [Fact]
+        public void TestAddOrder()
+        {
+            var package_list = new List<OutStorePackage>()
+            {
+                new OutStorePackage()
+                {
+                    Shipping = "USRLS",
+                    ShipToAddress = new ShipToAddress()
+                    {
+                        City = "WUHAN",
+                        Street1 = "wuhn",
+                        Phone = "13437267001",
+                        PostCode = "12345",
+                        Country = "United States",
+                        Contact = "WUHAN",
+                        Province = "WUHAN"
+                    },
+                    ProductList = new List<OutStoreProduct>()
+                    {
+                        new OutStoreProduct()
+                        {
+                            DeclareName = "123",
+                            DeclareValue = "1",
+                            SKU = "phone09",
+                            Quantity = 1
+                        }
+                    }
+
+                }
+            };
+
+            var parameters = new Dictionary<string, string>
+                                 {
+                                     { "Submit", "false" },
+                                     { "warehouse", "US" },
+                                     {"remark","test"},
+                                     { "package_list", JsonConvert.SerializeObject(package_list) }
+                                 };
+
+            var response = this.orderService.AddOrder(parameters);
+
+            Console.WriteLine(this.orderService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(parameters));
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+        }
+        #endregion
 
     }
 }

@@ -17,11 +17,13 @@ namespace API_V3_SDK.Test
     {
         private readonly Misc miscService;
         private readonly Package packageService;
+        private readonly Order orderService;
 
         public DirectExpressTest()
         {
             miscService = new Misc(ApiConfig.API_BASE_URL, ApiConfig.AuthParams);
             packageService = new Package(ApiConfig.API_BASE_URL, ApiConfig.AuthParams);
+            orderService = new Order(ApiConfig.API_BASE_URL, ApiConfig.AuthParams);
         }
 
         [Fact]
@@ -75,8 +77,8 @@ namespace API_V3_SDK.Test
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
         #endregion
-
         
+        #region ///打印标签
 
         [Fact]
         public void TestPrintLabelOk()
@@ -157,5 +159,75 @@ namespace API_V3_SDK.Test
             }
         }
 
+        #endregion
+
+        #region ///直发下单
+
+        [Fact]
+        public void TestAddOrder()
+        {
+            var productList = new List<ExpressProduct>()
+            {
+                new ExpressProduct()
+                {
+                    //StorageNo="GZ STOCK",
+                    Weight = 300,
+                    DeclareValue = 0.7M,
+                    //SKU = "Bag",
+                    Quantity = 1,
+                    CustomsTitleEN = "red Bag",
+                    CustomsTitleCN="包"
+                }
+            };
+
+            var OrderDetail = new ExpressOrder()
+            {
+                IsGzShare=false,
+                Remark="test",
+                PickupType=0,
+                Location = "GZ",
+                IsTracking = true,
+                ExpressType = 0,
+                PackageList =
+                    new List<ExpressPackage>()
+                    {
+                        new ExpressPackage
+                        {
+                            Remark="test",
+                            Weight = 300,
+                            RefNo = "TestV3_E",
+                            CheckRepeatRefNo = "true",
+                            ShipToAddress =
+                                new ShipToAddress
+                                {
+                                    City = "MEDLEY",
+                                    Contact = "fangwei",
+                                    Country = "United States",
+                                    Phone = "(305) 5009199",
+                                    PostCode = "33198-1044",
+                                    Province = "FL",
+                                    Street1 = "11800 NW 101ST RD,MIAMI FL 33198-1044 PHONE 305 5009199",
+                                    Email="123456@163.com"
+                                },
+                            Packing = new Packing {Height = 10, Length = 10, Width = 10},
+                            Status = "Initial",
+                            ProductList = productList
+                        }
+                    }
+            };
+            var parameters = new Dictionary<string, string>
+                                 {
+                                     { "Submit", "false" },
+                                     { "ExpressTypeNew", "CUE" },
+                                     { "OrderDetail", JsonConvert.SerializeObject(OrderDetail) }
+                                 };
+
+            var response = this.orderService.AddOrder(parameters);
+
+            Console.WriteLine(this.orderService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(parameters));
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+        }
+        #endregion
     }
 }

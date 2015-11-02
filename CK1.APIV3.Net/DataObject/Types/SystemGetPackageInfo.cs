@@ -49,29 +49,7 @@ namespace API_V3_SDK.DataObject.Types
 
         public string ServiceName { get; set; }
     }
-    public class ShipToAddress
-    {
-        public string Name { get; set; }
-
-        public string Address1 { get; set; }
-
-        public string Address2 { get; set; }
-
-        public string City { get; set; }
-
-        public string Province { get; set; }
-
-        public string Country { get; set; }
-
-        public string CountryCode { get; set; }
-
-        public string PostCode { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Email { get; set; }
-    }
-
+    
     public class PackageInfo
     {
         public Packing Packing { get; set; }
