@@ -84,11 +84,10 @@ namespace API_V3_SDK.Test
         public void TestPrintLabelOk()
         {
             const LabelPrintFormat format = LabelPrintFormat.classic_a4;
-            const LabelContentType content = LabelContentType.address;
+            const LabelContentType content = LabelContentType.address_costoms_split;
             var processNos = new[]
                                  {
-                                     "AET150819TST000081",
-                                     "AET150819TST000082",
+                                     "NLR151112TST000006"
                                  };
 
             var response = this.packageService.PrintLabel(format, content, processNos);
@@ -159,6 +158,84 @@ namespace API_V3_SDK.Test
             }
         }
 
+
+        [Fact]
+        public void TestGetLabelOk()
+        {
+            const LabelPrintFormat format = LabelPrintFormat.classic_a4;
+            const LabelContentType content = LabelContentType.address_costoms_split;
+            var processNos = new[]
+                                 {
+                                     "NLR151112TST000006"
+                                 };
+
+            var response = this.packageService.GetLabel(format, content, processNos);
+
+            Console.WriteLine(this.packageService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(new { format, content, processNos }));
+            if (response.meta.IsOKMeta())
+            {
+                var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
+
+                using (var fs = new FileStream(
+                    AppDomain.CurrentDomain.BaseDirectory + "\\" + fileName,
+                    FileMode.Create))
+                {
+                    var data = Convert.FromBase64String(response.body.Label);
+                    // 开始写入
+                    fs.Write(data, 0, data.Length);
+                    // 清空缓冲区、关闭流
+                    fs.Flush();
+                    fs.Close();
+                }
+
+                Console.WriteLine("save file " + fileName);
+            }
+            else
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(response));
+            }
+        }
+
+        [Fact]
+        public void TestGetLabelError()
+        {
+            const LabelPrintFormat format = LabelPrintFormat.classic_a4;
+            const LabelContentType content = LabelContentType.address;
+            var processNos = new[]
+                                 {
+                                     "AET150819TST000081",
+                                     "CUE150819TST000079",
+                                 };
+
+            var response = this.packageService.GetLabel(format, content, processNos);
+
+            Console.WriteLine(this.packageService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(new { format, content, processNos }));
+            if (response.meta.IsOKMeta())
+            {
+                var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
+
+                using (var fs = new FileStream(
+                    AppDomain.CurrentDomain.BaseDirectory + "\\" + fileName,
+                    FileMode.Create))
+                {
+                    var data = Convert.FromBase64String(response.body.Label);
+                    // 开始写入
+                    fs.Write(data, 0, data.Length);
+                    // 清空缓冲区、关闭流
+                    fs.Flush();
+                    fs.Close();
+                }
+
+                Console.WriteLine("save file " + fileName);
+            }
+            else
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(response));
+            }
+        }
+
         #endregion
 
         #region ///直发下单
@@ -194,7 +271,7 @@ namespace API_V3_SDK.Test
                         {
                             Remark="test",
                             Weight = 300,
-                            RefNo = "TestV3_E",
+                            RefNo = "TestV3_E1",
                             CheckRepeatRefNo = "true",
                             ShipToAddress =
                                 new ShipToAddress

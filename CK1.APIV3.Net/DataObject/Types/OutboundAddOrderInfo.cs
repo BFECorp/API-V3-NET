@@ -14,7 +14,7 @@ namespace API_V3_SDK.DataObject.Types
         /// <summary>
         /// 订单号
         /// </summary>
-        [JsonProperty(PropertyName = "order_size")]
+        [JsonProperty(PropertyName = "order_sign")]
         public string OrderSize { get; set; }
 
         /// <summary>

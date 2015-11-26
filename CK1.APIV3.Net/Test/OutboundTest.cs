@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using API_V3_SDK.DataObject.Actions;
 using Xunit;
 
 namespace API_V3_SDK.Test
@@ -79,6 +80,33 @@ namespace API_V3_SDK.Test
         #endregion
 
 
+        #region 计算多个SKU产品在指定仓库所有可用发货方式的运费
+
+        [Fact]
+        public void TestOutboundPricingAllSkus()
+        {
+            var request = new OutboundPricingAllSkusRequest()
+            {
+                DestinationType = "L",
+                SkuArray = new List<string>()
+                {
+                    "carey*2",
+                    "DE03*5"
+                },
+                ToCity = "New York",
+                ToRegion = "US",
+                ToZipCode = "34455",
+                Warehouse = "US"
+            };
+            var response = this.packageService.OutboundPricingAllSkus(request);
+
+            Console.WriteLine(this.packageService.BaseUrl);
+            Console.WriteLine(JsonConvert.SerializeObject(request));
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+        }
+        #endregion
+
+
         #region ///二程出库
 
         [Fact]
@@ -88,6 +116,7 @@ namespace API_V3_SDK.Test
             {
                 new OutStorePackage()
                 {
+                    Custom = "test",
                     Shipping = "USRLS",
                     ShipToAddress = new ShipToAddress()
                     {

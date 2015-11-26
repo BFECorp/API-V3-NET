@@ -16,4 +16,16 @@ namespace API_V3_SDK.DataObject.Actions
         [JsonProperty(PropertyName = "body")]
         public new MemoryStream body { get; set; }
     }
+    
+
+    class DirectExpressGetLabelResponse : API_V3_Response
+    {
+        [JsonProperty(PropertyName = "body")]
+        public new GetLabelResponseInfo body { get; set; }
+    }
+
+    class GetLabelResponseInfo
+    {
+        public string Label { get; set; }
+    }
 }

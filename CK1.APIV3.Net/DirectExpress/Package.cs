@@ -95,6 +95,33 @@
                        };
         }
 
+        public DirectExpressGetLabelResponse GetLabel(LabelPrintFormat format, LabelContentType content, params string[] processNos)
+        {
+            this.Dispatcher["action"] = "get-label";
+            var requestUrl = this.CreateRequestUrl(this.Dispatcher);
+
+            var parameters = new Dictionary<string, string>
+                                 {
+                                     { "format", format.ToString() },
+                                     { "content", content.ToString() }
+                                 };
+
+            var postData = "package_sn=" + string.Join("&package_sn=", processNos);
+
+            var result = HttpHelper.HttpPostStream(requestUrl, parameters, postData, Encoding.UTF8, 60 * 10);
+
+            //重置流
+            result.Position = 0;
+            var streamReader = new StreamReader(result, Encoding.UTF8);
+
+            // 检查返回页面
+            DirectExpressGetLabelResponse response = null;
+                var json = streamReader.ReadToEnd();
+                response = JsonConvert.DeserializeObject<DirectExpressGetLabelResponse>(json);
+
+            return response;
+        }
+
     }
     
 }

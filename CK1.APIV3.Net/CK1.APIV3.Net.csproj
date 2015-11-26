@@ -63,6 +63,8 @@
     <Compile Include="DataObject\Actions\DirectExpressPrintLabelResponse.cs" />
     <Compile Include="DataObject\Actions\OutboundAddOrderResponse.cs" />
     <Compile Include="DataObject\Actions\OutboundPricingAllResponse.cs" />
+    <Compile Include="DataObject\Actions\OutboundPricingAllSkusRequest.cs" />
+    <Compile Include="DataObject\Actions\OutboundPricingAllSkusResponse.cs" />
     <Compile Include="DataObject\Actions\OutboundPricingResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetPackagesResponse.cs" />
     <Compile Include="DataObject\Actions\SystemGetTrackingResponse.cs" />

@@ -9,7 +9,7 @@ namespace API_V3_SDK
 {
     class HttpHelper
     {
-        public static String HttpGet(string url, Dictionary<String, String> paramters)
+        public static String HttpGet(string url, Dictionary<String, String> paramters,string data="")
         {
             var paramStr = new StringBuilder("");
 
@@ -20,7 +20,7 @@ namespace API_V3_SDK
                     paramStr.AppendFormat("{0}={1}&", EncodingHelper.UrlEncodeU8(pair.Key.Trim()), EncodingHelper.UrlEncodeU8(pair.Value.Trim()));
                 }
             }
-
+            paramStr.Append(data);
             string requestAddress = string.Format("{0}{1}", url, paramStr);
             var webRequest = WebRequest.Create(requestAddress);
             webRequest.ContentType = "application/x-www-form-urlencoded";

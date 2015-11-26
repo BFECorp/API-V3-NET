@@ -46,6 +46,27 @@
             var json = HttpHelper.HttpGet(requestUrl, parameters);
             return JsonConvert.DeserializeObject<OutboundPricingAllResponse>(json);
         }
+
+        /// <summary>
+        /// 计算多个SKU产品在指定仓库所有可用发货方式的运费
+        /// </summary>
+        public OutboundPricingAllSkusResponse OutboundPricingAllSkus(OutboundPricingAllSkusRequest request)
+        {
+            this.Dispatcher["action"] = "pricing-all-for-skus";
+            var requestUrl = this.CreateRequestUrl(this.Dispatcher);
+
+            var parameters = new Dictionary<string, string>
+                                 {
+                                     { "destination_type", request.DestinationType },
+                                     { "to_city", request.ToCity },
+                                     { "to_region", request.ToRegion},
+                                     { "to_zip_code", request.ToZipCode },
+                                     { "warehouse", request.Warehouse }
+                                 };
+
+            var json = HttpHelper.HttpGet(requestUrl, parameters, "&sku_array=" + string.Join("&sku_array=", request.SkuArray.ToArray()));
+            return JsonConvert.DeserializeObject<OutboundPricingAllSkusResponse>(json);
+        }
         
     }
 
