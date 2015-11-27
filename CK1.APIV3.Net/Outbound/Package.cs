@@ -64,7 +64,7 @@
                                      { "warehouse", request.Warehouse }
                                  };
 
-            var json = HttpHelper.HttpGet(requestUrl, parameters, "&sku_array=" + string.Join("&sku_array=", request.SkuArray.ToArray()));
+            var json = HttpHelper.HttpGet(requestUrl, parameters, "sku_array=" + string.Join("&sku_array=", request.SkuArray.ToArray()));
             return JsonConvert.DeserializeObject<OutboundPricingAllSkusResponse>(json);
         }
         
